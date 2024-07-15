@@ -29,37 +29,37 @@ const connectDB = async () => {
   // check if we are already connected:
   const connectionState = mongoose.connection.readyState;
   if (connectionState === 1) {
-    // console.log('\x1b[32m%s\x1b[0m', 'Already connected to DB');
-    console.log('Already connected to DB');
+    console.log('\x1b[32m%s\x1b[0m', 'Already connected to DB');
+    // console.log('Already connected to DB');
     return;
   }
   if (connectionState === 2) {
-    // console.log('\x1b[33m%s\x1b[0m', 'Connecting...');
-    console.log('Connecting...');
+    console.log('\x1b[33m%s\x1b[0m', 'Connecting...');
+    // console.log('Connecting...');
     return;
   }
   try {
-    if (!process.env.MONGO_URL) {
-      throw new Error('mongo url not defined');
-    }
+    // if (!process.env.MONGO_URL) {
+    //   throw new Error('mongo url not defined');
+    // }
     // mongoose.connect(MONGODB_URI, {
-    const dbConnection = await mongoose.connect(process.env.MONGODB_URI!, {
+    const dbConnection = await mongoose.connect(MONGODB_URI, {
       // ! -> ts
       dbName: 'restapis-basics',
       bufferCommands: true,
     });
-    // console.log(
-    //   '\x1b[32m%s\x1b[0m',
-    //   `DB connection successful on host:${dbConnection.connection.host}`
-    // ); //
     console.log(
+      '\x1b[32m%s\x1b[0m',
       `DB connection successful on host:${dbConnection.connection.host}`
     ); //
     // console.log(
-    //   '\x1b[36m%s\x1b[0m',
-    //   `DB name: ${dbConnection.connection.name}`
-    // );
-    console.log(`DB name: ${dbConnection.connection.name}`);
+    //   `DB connection successful on host:${dbConnection.connection.host}`
+    // ); //
+    console.log(
+      '\x1b[36m%s\x1b[0m',
+      `DB name: ${dbConnection.connection.name}`
+    );
+    // console.log(`DB name: ${dbConnection.connection.name}`);
   } catch (error: any) {
     console.log('\x1b[31m%s\x1b[0m', `Error: ${error.message}`);
     throw new Error('Error: ', error);
